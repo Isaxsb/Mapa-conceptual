@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clasificación de Números</title>
+
+  <style>
+    /* Formato general */
+    body {
+      font-family: Arial;  
+    }
+
+    /* Clases reutilizables */
+    .flex {
+      display: flex;  
+    }
+
+    .flex-center {
+      justify-content: center;
+      align-items: center;  
+    }
+
+    .flex-column {
+      flex-direction: column; 
+    }
+
+    .container {
+      width: 800px;
+      max-width: 90%; 
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Conceptos */
+    .concept {
+      background: #ddd;
+      border-radius: 5px; 
+      padding: 10px 15px;
+      width: 150px;  
+      text-align: center;
+      margin: 5px;
+      cursor: pointer; /* Hace que el cursor sea un indicador de clic */
+    }
+
+    /* Líneas */ 
+    .line {
+      width: 2px;
+      background: black;
+      margin: 3px 6px;  
+    }
+
+    /* Contenedor de información adicional */
+    .additional-info {
+      display: none;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="flex flex-center">
+    <div class="container">
+
+      <div class="flex">
+        <div class="concept" onclick="toggleInfo(this)">Números Reales</div>
+        <div class="line"></div>
+        <div class="flex flex-column">
+          <div class="concept" onclick="toggleInfo(this)">Racionales</div>  
+          <div class="concept" onclick="toggleInfo(this)">Irracionales</div>
+        </div>  
+      </div>
+
+      <div class="flex">
+        <div class="concept" onclick="toggleInfo(this)">Números<br>Enteros</div>
+        <div class="line"></div>
+        <div class="flex flex-column">  
+          <div class="concept" onclick="toggleInfo(this, 'Naturales')">Naturales</div>
+          <div class="concept" onclick="toggleInfo(this, 'Negativos')">Negativos</div>
+        </div>
+      </div>
+
+      <div class="flex">
+        <div class="concept" onclick="toggleInfo(this)">Racionales</div>
+        <div class="line"></div>
+        <div class="flex flex-column">
+          <div class="concept" onclick="toggleInfo(this, 'Fracciones')">Fracciones</div>
+          <div class="concept" onclick="toggleInfo(this)">Enteros</div>
+        </div>
+      </div>
+
+      <!-- Contenedor de información adicional -->
+      <div id="info" class="additional-info">
+        <p id="info-text"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleInfo(element, specificInfo) {
+      // Obtener el texto del concepto
+      var conceptText = element.innerText;
+
+      // Mostrar u ocultar el contenedor de información adicional
+      var infoContainer = document.getElementById("info");
+      infoContainer.style.display = infoContainer.style.display === "none" ? "block" : "none";
+
+      // Actualizar el texto de la información adicional
+      var infoText = document.getElementById("info-text");
+      infoText.innerHTML = specificInfo ? getConceptInfo(specificInfo) : getConceptInfo(conceptText);
+    }
+
+    function getConceptInfo(concept) {
+      // Definiciones para cada concepto
+      var info = "";
+      switch (concept) {
+        case "Números Reales":
+          info = "Los números reales incluyen todos los números racionales e irracionales.";
+          break;
+        case "Racionales":
+          info = "Los números racionales son aquellos que pueden expresarse como fracción.";
+          break;
+        case "Irracionales":
+          info = "Los números irracionales no pueden expresarse como fracción y tienen infinitas cifras no periódicas.";
+          break;
+        case "Naturales":
+          info = "Los números naturales son los números enteros positivos, como 1, 2, 3, ...";
+          break;
+        case "Negativos":
+          info = "Los números negativos son aquellos menores que cero, como -1, -2, -3, ...";
+          break;
+        case "Fracciones":
+          info = "Las fracciones representan partes de un todo y tienen numerador y denominador.";
+          break;
+        case "Enteros":
+          info = "Los números enteros incluyen todos los números naturales, sus negativos y el cero.";
+          break;
+        default:
+          info = "Información adicional sobre " + concept;
+          break;
+      }
+      return info;
+    }
+  </script>
+
+</body>
+</html>
